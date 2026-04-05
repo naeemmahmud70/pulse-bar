@@ -1,0 +1,90 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  position: relative;
+  width: var(--btn-size);
+  height: var(--btn-size);
+  min-width: var(--btn-size);
+  border-radius: var(--btn-radius);
+  border: 1px solid rgba(255, 60, 60, 0.25);
+  background: var(--color-danger);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  isolation: isolate;
+  touch-action: manipulation;
+
+  /* Inner gradient for depth */
+  background-image: linear-gradient(160deg,
+      rgba(255, 80, 80, 0.30) 0%,
+      transparent 55%);
+  background-color: var(--color-danger);
+
+  box-shadow:
+    0 4px 20px rgba(209, 37, 37, 0.45),
+    0 1px 0 rgba(255, 100, 100, 0.20) inset;
+}
+
+.button:focus-visible {
+  outline: 2px solid rgba(255, 120, 120, 0.80);
+  outline-offset: 3px;
+}
+
+.button:hover {
+  background-color: var(--color-danger-hover);
+  box-shadow:
+    0 6px 28px rgba(209, 37, 37, 0.65),
+    0 1px 0 rgba(255, 120, 120, 0.25) inset;
+}
+
+/* ── Idle pulse ring ─────────────────────────────────── */
+.pulseRing {
+  position: absolute;
+  inset: -2px;
+  border-radius: calc(var(--btn-radius) + 2px);
+  border: 2px solid rgba(209, 37, 37, 0.50);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Hover glow ──────────────────────────────────────── */
+.hoverGlow {
+  position: absolute;
+  inset: -8px;
+  border-radius: calc(var(--btn-radius) + 8px);
+  background: radial-gradient(ellipse 100% 100% at 50% 50%,
+      rgba(209, 37, 37, 0.30) 0%,
+      transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Ripple ──────────────────────────────────────────── */
+.ripple {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 120, 120, 0.25);
+  translate: -50% -50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Icon ────────────────────────────────────────────── */
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 2;
+  position: relative;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.30));
+}

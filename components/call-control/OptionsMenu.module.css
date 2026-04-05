@@ -1,0 +1,145 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Trigger button ────────────────────────────────── */
+.trigger {
+  position: relative;
+  width: var(--btn-size);
+  height: var(--btn-size);
+  border-radius: var(--btn-radius);
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-icon-default);
+  transition: background var(--dur-med) var(--ease-out),
+    border-color var(--dur-med) var(--ease-out);
+}
+
+.trigger:hover,
+.triggerOpen {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.10);
+}
+
+.trigger:focus-visible {
+  outline: 2px solid rgba(99, 213, 255, 0.80);
+  outline-offset: 3px;
+}
+
+/* ── Menu container ────────────────────────────────── */
+.menuContainer {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  right: 0;
+  z-index: 200;
+  transform-origin: bottom right;
+}
+
+.menu {
+  list-style: none;
+  background: var(--menu-bg);
+  border: 1px solid var(--menu-border);
+  border-radius: var(--menu-radius);
+  padding: 6px;
+  min-width: 220px;
+  backdrop-filter: blur(40px) saturate(180%);
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.60),
+    0 4px 16px rgba(0, 0, 0, 0.30),
+    0 1px 0 rgba(255, 255, 255, 0.06) inset;
+
+  /* Top highlight */
+  background-image: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.04) 0%,
+      transparent 40%);
+}
+
+/* ── Menu item ─────────────────────────────────────── */
+.menuItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: var(--menu-item-radius);
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+  transition: color var(--dur-fast) var(--ease-out);
+  color: rgba(255, 255, 255, 0.80);
+  font-size: 13.5px;
+  font-weight: 450;
+  letter-spacing: -0.01em;
+}
+
+.menuItem:focus-visible {
+  outline: 2px solid rgba(99, 213, 255, 0.70);
+  outline-offset: -2px;
+}
+
+.menuItem:hover {
+  color: rgba(255, 255, 255, 0.96);
+}
+
+.danger {
+  color: rgba(255, 100, 100, 0.85);
+}
+
+.danger:hover {
+  color: rgba(255, 120, 120, 1);
+}
+
+/* ── Hover bg (shared via layoutId) ───────────────── */
+.menuItemBg {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--menu-item-radius);
+  background: var(--menu-item-hover);
+  pointer-events: none;
+}
+
+/* ── Item parts ────────────────────────────────────── */
+.menuItemIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  opacity: 0.75;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.menuItem:hover .menuItemIcon {
+  opacity: 1;
+}
+
+.menuItemLabel {
+  flex: 1;
+  z-index: 1;
+}
+
+.menuItemShortcut {
+  font-size: 11.5px;
+  font-family: var(--font-mono);
+  color: rgba(255, 255, 255, 0.30);
+  z-index: 1;
+}
+
+.menuItemChevron {
+  display: flex;
+  color: rgba(255, 255, 255, 0.40);
+  z-index: 1;
+}
+
+/* ── Divider ───────────────────────────────────────── */
+.menuItem+.menuItem {
+  /* subtle separator via gap — override if needed */
+}
