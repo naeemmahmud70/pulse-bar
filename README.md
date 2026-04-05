@@ -78,22 +78,19 @@ A premium, production-grade call control bar UI built with **Next.js 14 (App Rou
 
 ### Prerequisites
 - Node.js 18.17+ 
-- npm / yarn / pnpm
+- npm
 
-### Install & Run
+### NPM Install & Run
 
 ```bash
-# 1. Unzip the project
-unzip call-control-bar.zip
-cd call-control-bar
 
-# 2. Install dependencies
+# 1. Install dependencies
 npm install
 
-# 3. Start dev server
+# 2. Start dev server
 npm run dev
 
-# 4. Open browser
+# 3. Open browser
 open http://localhost:3000
 ```
 
