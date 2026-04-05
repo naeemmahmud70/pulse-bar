@@ -22,11 +22,9 @@
   touch-action: manipulation;
 
   /* Inner gradient for depth */
-  background-image: linear-gradient(
-    160deg,
-    rgba(255, 80, 80, 0.30) 0%,
-    transparent 55%
-  );
+  background-image: linear-gradient(160deg,
+      rgba(255, 80, 80, 0.30) 0%,
+      transparent 55%);
   background-color: var(--color-danger);
 
   box-shadow:
@@ -61,11 +59,9 @@
   position: absolute;
   inset: -8px;
   border-radius: calc(var(--btn-radius) + 8px);
-  background: radial-gradient(
-    ellipse 100% 100% at 50% 50%,
-    rgba(209, 37, 37, 0.30) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(ellipse 100% 100% at 50% 50%,
+      rgba(209, 37, 37, 0.30) 0%,
+      transparent 70%);
   pointer-events: none;
   z-index: 0;
 }

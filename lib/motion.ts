@@ -1,29 +1,29 @@
-import type { Variants, Transition } from 'framer-motion';
+import type { Variants, Transition } from "framer-motion";
 
 // ─── Spring presets ────────────────────────────────────────────────────
 export const springSnappy: Transition = {
-  type: 'spring',
+  type: "spring",
   stiffness: 320,
   damping: 24,
   mass: 0.8,
 };
 
 export const springGentle: Transition = {
-  type: 'spring',
+  type: "spring",
   stiffness: 260,
   damping: 28,
   mass: 1,
 };
 
 export const springBouncy: Transition = {
-  type: 'spring',
+  type: "spring",
   stiffness: 400,
   damping: 20,
   mass: 0.6,
 };
 
 export const springMedium: Transition = {
-  type: 'spring',
+  type: "spring",
   stiffness: 280,
   damping: 22,
   mass: 0.9,
@@ -40,9 +40,9 @@ export const buttonPressTransition: Transition = springSnappy;
 
 // ─── Icon swap (active / inactive) ────────────────────────────────────
 export const iconSwapVariants: Variants = {
-  enter: { opacity: 0, scale: 0.6, rotate: -12, filter: 'blur(3px)' },
-  center: { opacity: 1, scale: 1, rotate: 0, filter: 'blur(0px)' },
-  exit: { opacity: 0, scale: 0.6, rotate: 12, filter: 'blur(3px)' },
+  enter: { opacity: 0, scale: 0.6, rotate: -12, filter: "blur(3px)" },
+  center: { opacity: 1, scale: 1, rotate: 0, filter: "blur(0px)" },
+  exit: { opacity: 0, scale: 0.6, rotate: 12, filter: "blur(3px)" },
 };
 
 export const iconSwapTransition: Transition = {
@@ -59,7 +59,7 @@ export const slashVariants: Variants = {
 };
 
 export const slashTransition: Transition = {
-  pathLength: { type: 'spring', stiffness: 260, damping: 22 },
+  pathLength: { type: "spring", stiffness: 260, damping: 22 },
   opacity: { duration: 0.1 },
 };
 
@@ -72,7 +72,7 @@ export const glowPulseVariants: Variants = {
     transition: {
       duration: 2.4,
       repeat: Infinity,
-      ease: 'easeInOut',
+      ease: "easeInOut",
     },
   },
 };
@@ -80,7 +80,11 @@ export const glowPulseVariants: Variants = {
 // ─── Ripple ────────────────────────────────────────────────────────────
 export const rippleVariants: Variants = {
   start: { scale: 0, opacity: 0.5 },
-  end: { scale: 2.8, opacity: 0, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] } },
+  end: {
+    scale: 2.8,
+    opacity: 0,
+    transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] },
+  },
 };
 
 // ─── Options menu ──────────────────────────────────────────────────────
@@ -89,21 +93,21 @@ export const menuVariants: Variants = {
     opacity: 0,
     scale: 0.88,
     y: 12,
-    transformOrigin: 'bottom center',
-    filter: 'blur(4px)',
+    transformOrigin: "bottom center",
+    filter: "blur(4px)",
   },
   visible: {
     opacity: 1,
     scale: 1,
     y: 0,
-    filter: 'blur(0px)',
+    filter: "blur(0px)",
     transition: { ...springGentle, staggerChildren: 0.04 },
   },
   exit: {
     opacity: 0,
-    scale: 0.90,
+    scale: 0.9,
     y: 8,
-    filter: 'blur(4px)',
+    filter: "blur(4px)",
     transition: { ...springSnappy, duration: 0.16 },
   },
 };
@@ -116,7 +120,7 @@ export const menuItemVariants: Variants = {
 
 // ─── Tooltip ───────────────────────────────────────────────────────────
 export const tooltipVariants: Variants = {
-  hidden: { opacity: 0, y: 6, scale: 0.90 },
+  hidden: { opacity: 0, y: 6, scale: 0.9 },
   visible: {
     opacity: 1,
     y: 0,
@@ -133,12 +137,12 @@ export const tooltipVariants: Variants = {
 
 // ─── Bar entrance ──────────────────────────────────────────────────────
 export const barEntranceVariants: Variants = {
-  hidden: { opacity: 0, y: 32, scale: 0.92, filter: 'blur(8px)' },
+  hidden: { opacity: 0, y: 32, scale: 0.92, filter: "blur(8px)" },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
-    filter: 'blur(0px)',
+    filter: "blur(0px)",
     transition: { ...springGentle, staggerChildren: 0.06, delayChildren: 0.1 },
   },
 };
@@ -150,13 +154,13 @@ export const barChildVariants: Variants = {
 
 // ─── Danger idle pulse ─────────────────────────────────────────────────
 export const dangerPulseVariants: Variants = {
-  idle: { boxShadow: '0 0 0 0px rgba(209,37,37,0.0)' },
+  idle: { boxShadow: "0 0 0 0px rgba(209,37,37,0.0)" },
   pulse: {
     boxShadow: [
-      '0 0 0 0px rgba(209,37,37,0.0)',
-      '0 0 0 6px rgba(209,37,37,0.25)',
-      '0 0 0 0px rgba(209,37,37,0.0)',
+      "0 0 0 0px rgba(209,37,37,0.0)",
+      "0 0 0 6px rgba(209,37,37,0.25)",
+      "0 0 0 0px rgba(209,37,37,0.0)",
     ],
-    transition: { duration: 2.8, repeat: Infinity, ease: 'easeOut' },
+    transition: { duration: 2.8, repeat: Infinity, ease: "easeOut" },
   },
 };

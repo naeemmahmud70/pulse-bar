@@ -1,10 +1,14 @@
-'use client';
+"use client";
 
 import {
-  useState, useCallback, useEffect, useRef,
-  forwardRef, type KeyboardEvent,
-} from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+  useState,
+  useCallback,
+  useEffect,
+  useRef,
+  forwardRef,
+  type KeyboardEvent,
+} from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   MoreHorizontal,
   Settings,
@@ -13,10 +17,10 @@ import {
   Users,
   MessageSquare,
   ChevronRight,
-} from 'lucide-react';
-import { menuVariants, menuItemVariants, springSnappy } from '@/lib/motion';
-import { Tooltip } from '@/components/ui/Tooltip';
-import styles from './OptionsMenu.module.css';
+} from "lucide-react";
+import { menuVariants, menuItemVariants, springSnappy } from "@/lib/motion";
+import { Tooltip } from "@/components/ui/Tooltip";
+import styles from "./OptionsMenu.module.css";
 
 interface MenuItem {
   id: string;
@@ -27,11 +31,25 @@ interface MenuItem {
 }
 
 const MENU_ITEMS: MenuItem[] = [
-  { id: 'settings', label: 'Settings', icon: <Settings size={15} />, shortcut: '⌘,' },
-  { id: 'backgrounds', label: 'Virtual Backgrounds', icon: <Layers size={15} /> },
-  { id: 'share', label: 'Share Screen', icon: <Monitor size={15} /> },
-  { id: 'participants', label: 'Participants', icon: <Users size={15} />, shortcut: '⌘U' },
-  { id: 'chat', label: 'In-call Chat', icon: <MessageSquare size={15} /> },
+  {
+    id: "settings",
+    label: "Settings",
+    icon: <Settings size={15} />,
+    shortcut: "⌘,",
+  },
+  {
+    id: "backgrounds",
+    label: "Virtual Backgrounds",
+    icon: <Layers size={15} />,
+  },
+  { id: "share", label: "Share Screen", icon: <Monitor size={15} /> },
+  {
+    id: "participants",
+    label: "Participants",
+    icon: <Users size={15} />,
+    shortcut: "⌘U",
+  },
+  { id: "chat", label: "In-call Chat", icon: <MessageSquare size={15} /> },
 ];
 
 export function OptionsMenu() {
@@ -43,7 +61,7 @@ export function OptionsMenu() {
   const menuRef = useRef<HTMLUListElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
-  const toggle = useCallback(() => setOpen(v => !v), []);
+  const toggle = useCallback(() => setOpen((v) => !v), []);
   const close = useCallback(() => {
     setOpen(false);
     triggerRef.current?.focus();
@@ -54,35 +72,44 @@ export function OptionsMenu() {
     if (!open) return;
     const handler = (e: MouseEvent) => {
       if (
-        menuRef.current && !menuRef.current.contains(e.target as Node) &&
-        triggerRef.current && !triggerRef.current.contains(e.target as Node)
+        menuRef.current &&
+        !menuRef.current.contains(e.target as Node) &&
+        triggerRef.current &&
+        !triggerRef.current.contains(e.target as Node)
       ) {
         setOpen(false);
       }
     };
-    document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
   }, [open]);
 
   // Escape + arrow keys
-  const handleMenuKeyDown = useCallback((e: KeyboardEvent<HTMLUListElement>) => {
-    if (e.key === 'Escape') { close(); return; }
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      setFocusedIdx(i => (i + 1) % MENU_ITEMS.length);
-    }
-    if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      setFocusedIdx(i => (i - 1 + MENU_ITEMS.length) % MENU_ITEMS.length);
-    }
-  }, [close]);
+  const handleMenuKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLUListElement>) => {
+      if (e.key === "Escape") {
+        close();
+        return;
+      }
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        setFocusedIdx((i) => (i + 1) % MENU_ITEMS.length);
+      }
+      if (e.key === "ArrowUp") {
+        e.preventDefault();
+        setFocusedIdx((i) => (i - 1 + MENU_ITEMS.length) % MENU_ITEMS.length);
+      }
+    },
+    [close],
+  );
 
   // Focus correct item
   useEffect(() => {
     if (open) {
       setFocusedIdx(0);
       setTimeout(() => {
-        const items = menuRef.current?.querySelectorAll<HTMLElement>('[role="menuitem"]');
+        const items =
+          menuRef.current?.querySelectorAll<HTMLElement>('[role="menuitem"]');
         items?.[0]?.focus();
       }, 80);
     }
@@ -90,7 +117,8 @@ export function OptionsMenu() {
 
   useEffect(() => {
     if (!open) return;
-    const items = menuRef.current?.querySelectorAll<HTMLElement>('[role="menuitem"]');
+    const items =
+      menuRef.current?.querySelectorAll<HTMLElement>('[role="menuitem"]');
     items?.[focusedIdx]?.focus();
   }, [focusedIdx, open]);
 
@@ -98,16 +126,22 @@ export function OptionsMenu() {
     <div className={styles.wrapper}>
       <motion.button
         ref={triggerRef}
-        className={[styles.trigger, open ? styles.triggerOpen : ''].join(' ')}
+        className={[styles.trigger, open ? styles.triggerOpen : ""].join(" ")}
         aria-label="More options"
         aria-haspopup="menu"
         aria-expanded={open}
         onClick={toggle}
-        onMouseEnter={() => { setIsHov(true); setShowTip(true); }}
-        onMouseLeave={() => { setIsHov(false); setShowTip(false); }}
+        onMouseEnter={() => {
+          setIsHov(true);
+          setShowTip(true);
+        }}
+        onMouseLeave={() => {
+          setIsHov(false);
+          setShowTip(false);
+        }}
         onMouseDown={() => setIsPres(true)}
         onMouseUp={() => setIsPres(false)}
-        animate={isPres ? 'press' : isHov ? 'hover' : 'idle'}
+        animate={isPres ? "press" : isHov ? "hover" : "idle"}
         variants={{
           idle: { scale: 1, rotate: 0 },
           hover: { scale: 1.06, rotate: 90 },
@@ -117,12 +151,12 @@ export function OptionsMenu() {
       >
         <AnimatePresence mode="wait" initial={false}>
           <motion.span
-            key={open ? 'open' : 'closed'}
+            key={open ? "open" : "closed"}
             initial={{ opacity: 0, rotate: -45, scale: 0.6 }}
             animate={{ opacity: 1, rotate: 0, scale: 1 }}
             exit={{ opacity: 0, rotate: 45, scale: 0.6 }}
-            transition={{ type: 'spring', stiffness: 320, damping: 24 }}
-            style={{ display: 'flex' }}
+            transition={{ type: "spring", stiffness: 320, damping: 24 }}
+            style={{ display: "flex" }}
           >
             <MoreHorizontal size={20} />
           </motion.span>
@@ -152,7 +186,9 @@ export function OptionsMenu() {
                   key={item.id}
                   item={item}
                   focused={focusedIdx === i}
-                  onSelect={() => { setOpen(false); }}
+                  onSelect={() => {
+                    setOpen(false);
+                  }}
                 />
               ))}
             </ul>
@@ -177,15 +213,19 @@ const MenuItemRow = forwardRef<HTMLLIElement, MenuItemRowProps>(
     return (
       <motion.li
         ref={ref}
-        className={[styles.menuItem, item.danger ? styles.danger : ''].join(' ')}
+        className={[styles.menuItem, item.danger ? styles.danger : ""].join(
+          " ",
+        )}
         role="menuitem"
         tabIndex={-1}
         onClick={onSelect}
         onMouseEnter={() => setHov(true)}
         onMouseLeave={() => setHov(false)}
-        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onSelect(); }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") onSelect();
+        }}
         variants={menuItemVariants}
-        animate={hov ? 'hovered' : 'visible'}
+        animate={hov ? "hovered" : "visible"}
         whileTap={{ scale: 0.97 }}
       >
         {/* Hover bg */}
@@ -216,6 +256,6 @@ const MenuItemRow = forwardRef<HTMLLIElement, MenuItemRowProps>(
         </motion.span>
       </motion.li>
     );
-  }
+  },
 );
-MenuItemRow.displayName = 'MenuItemRow';
+MenuItemRow.displayName = "MenuItemRow";

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { AnimatePresence, motion } from 'framer-motion';
-import { tooltipVariants } from '@/lib/motion';
-import styles from './Tooltip.module.css';
+import { AnimatePresence, motion } from "framer-motion";
+import { tooltipVariants } from "@/lib/motion";
+import styles from "./Tooltip.module.css";
 
 interface TooltipProps {
   label: string;

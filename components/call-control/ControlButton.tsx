@@ -1,7 +1,12 @@
-'use client';
+"use client";
 
-import { useState, useCallback, useRef, type ReactNode } from 'react';
-import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
+import { useState, useCallback, useRef, type ReactNode } from "react";
+import {
+  motion,
+  AnimatePresence,
+  useMotionValue,
+  useTransform,
+} from "framer-motion";
 import {
   buttonPressVariants,
   buttonPressTransition,
@@ -10,9 +15,9 @@ import {
   glowPulseVariants,
   rippleVariants,
   springSnappy,
-} from '@/lib/motion';
-import { Tooltip } from '@/components/ui/Tooltip';
-import styles from './ControlButton.module.css';
+} from "@/lib/motion";
+import { Tooltip } from "@/components/ui/Tooltip";
+import styles from "./ControlButton.module.css";
 
 export interface ControlButtonProps {
   /** Icon to show when active/on */
@@ -67,13 +72,16 @@ export function ControlButton({
   const translateX = useTransform(mouseX, [-24, 24], [-4, 4]);
   const translateY = useTransform(mouseY, [-24, 24], [-3, 3]);
 
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    mouseX.set(e.clientX - cx);
-    mouseY.set(e.clientY - cy);
-  }, [mouseX, mouseY]);
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      mouseX.set(e.clientX - cx);
+      mouseY.set(e.clientY - cy);
+    },
+    [mouseX, mouseY],
+  );
 
   const handleMouseLeave = useCallback(() => {
     mouseX.set(0);
@@ -87,16 +95,22 @@ export function ControlButton({
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     const id = rippleCounter++;
-    setRipples(prev => [...prev, { id, x, y }]);
-    setTimeout(() => setRipples(prev => prev.filter(r => r.id !== id)), 600);
+    setRipples((prev) => [...prev, { id, x, y }]);
+    setTimeout(
+      () => setRipples((prev) => prev.filter((r) => r.id !== id)),
+      600,
+    );
   }, []);
 
-  const handleClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
-    spawnRipple(e);
-    onToggle();
-  }, [spawnRipple, onToggle]);
+  const handleClick = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      spawnRipple(e);
+      onToggle();
+    },
+    [spawnRipple, onToggle],
+  );
 
-  const currentVariant = isPressed ? 'press' : isHovered ? 'hover' : 'idle';
+  const currentVariant = isPressed ? "press" : isHovered ? "hover" : "idle";
 
   return (
     <div className={styles.wrapper}>
@@ -106,17 +120,26 @@ export function ControlButton({
           styles.button,
           isActive ? styles.active : styles.inactive,
           className,
-        ].filter(Boolean).join(' ')}
+        ]
+          .filter(Boolean)
+          .join(" ")}
         aria-label={ariaLabel}
         aria-pressed={isActive}
         onClick={handleClick}
         onMouseMove={handleMouseMove}
-        onMouseEnter={() => { setIsHovered(true); setShowTooltip(true); }}
+        onMouseEnter={() => {
+          setIsHovered(true);
+          setShowTooltip(true);
+        }}
         onMouseLeave={handleMouseLeave}
         onMouseDown={() => setIsPressed(true)}
         onMouseUp={() => setIsPressed(false)}
-        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setIsPressed(true); }}
-        onKeyUp={(e) => { if (e.key === 'Enter' || e.key === ' ') setIsPressed(false); }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") setIsPressed(true);
+        }}
+        onKeyUp={(e) => {
+          if (e.key === "Enter" || e.key === " ") setIsPressed(false);
+        }}
         style={{ x: translateX, y: translateY }}
         variants={buttonPressVariants}
         animate={currentVariant}
@@ -138,7 +161,7 @@ export function ControlButton({
 
         {/* Ripples */}
         <AnimatePresence>
-          {ripples.map(r => (
+          {ripples.map((r) => (
             <motion.span
               key={r.id}
               className={styles.ripple}
@@ -154,7 +177,7 @@ export function ControlButton({
         <span className={styles.iconWrap} aria-hidden="true">
           <AnimatePresence mode="wait" initial={false}>
             <motion.span
-              key={isActive ? 'on' : 'off'}
+              key={isActive ? "on" : "off"}
               className={styles.iconInner}
               variants={iconSwapVariants}
               initial="enter"
@@ -172,7 +195,7 @@ export function ControlButton({
           <motion.span
             className={styles.waveWrap}
             initial={{ opacity: 0, width: 0 }}
-            animate={{ opacity: 1, width: 'auto' }}
+            animate={{ opacity: 1, width: "auto" }}
             exit={{ opacity: 0, width: 0 }}
             transition={springSnappy}
           >
@@ -192,14 +215,17 @@ export function ControlButton({
             >
               <svg viewBox="0 0 20 20" fill="none" width={20} height={20}>
                 <motion.line
-                  x1="3" y1="3" x2="17" y2="17"
+                  x1="3"
+                  y1="3"
+                  x2="17"
+                  y2="17"
                   stroke="rgba(255,80,80,0.80)"
                   strokeWidth="2"
                   strokeLinecap="round"
                   initial={{ pathLength: 0 }}
                   animate={{ pathLength: 1 }}
                   exit={{ pathLength: 0 }}
-                  transition={{ type: 'spring', stiffness: 260, damping: 22 }}
+                  transition={{ type: "spring", stiffness: 260, damping: 22 }}
                 />
               </svg>
             </motion.span>
@@ -239,10 +265,10 @@ function AudioWave() {
           transition={{
             duration: 0.9 + i * 0.07,
             repeat: Infinity,
-            ease: 'easeInOut',
+            ease: "easeInOut",
             delay: i * 0.06,
           }}
-          style={{ '--bar-base': `${h * 1.5}px` } as React.CSSProperties}
+          style={{ "--bar-base": `${h * 1.5}px` } as React.CSSProperties}
         />
       ))}
     </span>

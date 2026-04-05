@@ -1,18 +1,21 @@
-'use client';
+"use client";
 
-import { useState, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useCallback } from "react";
+import { motion } from "framer-motion";
 import {
-  Mic, MicOff,
-  Video, VideoOff,
-  MonitorUp, MonitorX,
+  Mic,
+  MicOff,
+  Video,
+  VideoOff,
+  MonitorUp,
+  MonitorX,
   Hand,
-} from 'lucide-react';
-import { barEntranceVariants, barChildVariants } from '@/lib/motion';
-import { ControlButton } from './ControlButton';
-import { HangupButton } from './HangupButton';
-import { OptionsMenu } from './OptionsMenu';
-import styles from './CallControlBar.module.css';
+} from "lucide-react";
+import { barEntranceVariants, barChildVariants } from "@/lib/motion";
+import { ControlButton } from "./ControlButton";
+import { HangupButton } from "./HangupButton";
+import { OptionsMenu } from "./OptionsMenu";
+import styles from "./CallControlBar.module.css";
 
 interface CallState {
   micActive: boolean;
@@ -32,13 +35,13 @@ export function CallControlBar() {
   });
 
   const toggle = useCallback((key: keyof CallState) => {
-    setState(prev => ({ ...prev, [key]: !prev[key] }));
+    setState((prev) => ({ ...prev, [key]: !prev[key] }));
   }, []);
 
   const handleHangup = useCallback(() => {
-    setState(prev => ({ ...prev, callActive: false }));
+    setState((prev) => ({ ...prev, callActive: false }));
     // Visual reset after "end call"
-    setTimeout(() => setState(prev => ({ ...prev, callActive: true })), 1800);
+    setTimeout(() => setState((prev) => ({ ...prev, callActive: true })), 1800);
   }, []);
 
   return (
@@ -59,9 +62,9 @@ export function CallControlBar() {
           iconOn={<Mic size={20} />}
           iconOff={<MicOff size={20} />}
           isActive={state.micActive}
-          ariaLabel={state.micActive ? 'Mute microphone' : 'Unmute microphone'}
-          tooltip={state.micActive ? 'Mute' : 'Unmute'}
-          onToggle={() => toggle('micActive')}
+          ariaLabel={state.micActive ? "Mute microphone" : "Unmute microphone"}
+          tooltip={state.micActive ? "Mute" : "Unmute"}
+          onToggle={() => toggle("micActive")}
           showWave
         />
       </motion.div>
@@ -72,9 +75,9 @@ export function CallControlBar() {
           iconOn={<Video size={20} />}
           iconOff={<VideoOff size={20} />}
           isActive={state.cameraActive}
-          ariaLabel={state.cameraActive ? 'Stop video' : 'Start video'}
-          tooltip={state.cameraActive ? 'Stop video' : 'Start video'}
-          onToggle={() => toggle('cameraActive')}
+          ariaLabel={state.cameraActive ? "Stop video" : "Start video"}
+          tooltip={state.cameraActive ? "Stop video" : "Start video"}
+          onToggle={() => toggle("cameraActive")}
         />
       </motion.div>
 
@@ -91,10 +94,10 @@ export function CallControlBar() {
           iconOn={<MonitorUp size={20} />}
           iconOff={<MonitorX size={20} />}
           isActive={state.screenActive}
-          ariaLabel={state.screenActive ? 'Stop sharing' : 'Share screen'}
-          tooltip={state.screenActive ? 'Stop sharing' : 'Share screen'}
-          onToggle={() => toggle('screenActive')}
-          className={state.screenActive ? styles.shareActive : ''}
+          ariaLabel={state.screenActive ? "Stop sharing" : "Share screen"}
+          tooltip={state.screenActive ? "Stop sharing" : "Share screen"}
+          onToggle={() => toggle("screenActive")}
+          className={state.screenActive ? styles.shareActive : ""}
         />
       </motion.div>
 
@@ -103,17 +106,21 @@ export function CallControlBar() {
         <ControlButton
           iconOn={
             <motion.span
-              animate={state.handRaised ? { rotate: [0, -12, 12, -8, 8, 0] } : { rotate: 0 }}
+              animate={
+                state.handRaised
+                  ? { rotate: [0, -12, 12, -8, 8, 0] }
+                  : { rotate: 0 }
+              }
               transition={{ duration: 0.5 }}
-              style={{ display: 'flex' }}
+              style={{ display: "flex" }}
             >
               <span style={{ fontSize: 18 }}>✋</span>
             </motion.span>
           }
           isActive={state.handRaised}
-          ariaLabel={state.handRaised ? 'Lower hand' : 'Raise hand'}
-          tooltip={state.handRaised ? 'Lower hand' : 'Raise hand'}
-          onToggle={() => toggle('handRaised')}
+          ariaLabel={state.handRaised ? "Lower hand" : "Raise hand"}
+          tooltip={state.handRaised ? "Lower hand" : "Raise hand"}
+          onToggle={() => toggle("handRaised")}
         />
       </motion.div>
 
