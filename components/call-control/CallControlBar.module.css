@@ -1,0 +1,63 @@
+.bar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: var(--bar-padding);
+  gap: var(--bar-gap);
+  border-radius: var(--bar-radius);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-bar);
+  backdrop-filter: blur(50px) saturate(180%);
+  -webkit-backdrop-filter: blur(50px) saturate(180%);
+  box-shadow: var(--shadow-bar);
+
+  /* Gradient overlay for depth */
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      transparent 40%
+    );
+
+  /* Prevent text selection on double-click */
+  user-select: none;
+}
+
+/* ── Top inner highlight ──────────────────────────── */
+.topHighlight {
+  position: absolute;
+  top: 0;
+  left: 16px;
+  right: 16px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-border-highlight) 30%,
+    var(--color-border-highlight) 70%,
+    transparent 100%
+  );
+  border-radius: 1px;
+  pointer-events: none;
+}
+
+/* ── Divider ──────────────────────────────────────── */
+.divider {
+  display: block;
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.10);
+  border-radius: 1px;
+  margin: 0 2px;
+  flex-shrink: 0;
+}
+
+/* ── Screen share active state ────────────────────── */
+.shareActive {
+  border-color: rgba(26, 180, 96, 0.40) !important;
+  background: rgba(26, 180, 96, 0.12) !important;
+}
+
+.shareActive svg {
+  color: rgba(80, 230, 140, 0.95);
+}
